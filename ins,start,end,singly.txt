@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+#include<conio.h>
+struct node {
+int data;
+struct node * next;
+};
+struct node * start = NULL;
+struct node * create_LL(struct node * start) {
+struct node * new_node, * ptr;
+int num;
+printf("\nEnter -1 to end");
+printf("\nEnter the data or Enter -1 : ");
+scanf("%d", & num);
+while (num != -1) {
+new_node = (struct node * ) malloc(sizeof(struct node));
+new_node -> data = num;
+if (start == NULL) {
+new_node -> next = NULL;
+start = new_node;
+} else {
+ptr = start;
+while (ptr -> next != NULL) {
+ptr = ptr -> next;
+}
+ptr -> next = new_node;
+new_node -> next = NULL;
+}
+printf("\nEnter the data :");
+scanf("%d", & num);
+}
+return start;
+}
+struct node * insert_beg(struct node * start) {
+struct node * new_node;
+int num;
+printf("Enter a num : ");
+scanf("%d", & num);
+new_node = (struct node * ) malloc(sizeof(struct node));
+new_node -> data = num;
+new_node -> next = start;
+start = new_node;
+return start;
+}
+struct node * insert_end(struct node * start) {
+struct node * ptr, * new_node;
+int num;
+printf("Enter a num : ");
+scanf("%d", & num);
+new_node = (struct node * ) malloc(sizeof(struct node));
+new_node -> data = num;
+ptr = start;
+while (ptr -> next != NULL) {
+ptr = ptr -> next;
+}
+ptr -> next = new_node;
+new_node -> next = NULL;
+return start;
+}
+struct node * display(struct node * start) {
+struct node * ptr;
+ptr = start;
+if (ptr == NULL) {
+printf("There is no existing list");
+return 0;
+}
+while (ptr != NULL) {
+printf("%d\t", ptr -> data);
+ptr = ptr -> next;
+}
+return start;
+}
+int main() {
+int option;
+do {
+printf("\n**** Main Menu *****");
+printf("\n1. Create a new linked list");
+printf("\n2. Insert the element at the Beginning");
+printf("\n3. Insert the element at the End");
+printf("\n4. Display the list");
+printf("\n5. Exit");
+printf("\nEnter your choice : ");
+scanf("%d", & option);
+switch (option) {
+case 1:
+start = create_LL(start);
+printf("LL IS CREATED");
+break;
+case 2:
+start = insert_beg(start);
+break;
+case 3:
+start = insert_end(start);
+break;
+case 4:
+start = display(start);
+break;
+}
+}
+while (option != 5);
+return 0;
+}
+

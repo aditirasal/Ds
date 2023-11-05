@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define size 5
+int queue[size];
+int front = -1;
+int rear = -1;
+void Enqueue(int data){
+if(rear == size-1){
+printf("Queue Overflow !\n");
+}
+else if(front == -1 && rear == -1){
+front = rear = 0;
+queue[rear] = data;
+printf("Data Entered : %d\n",data);
+}
+else{
+rear++;
+queue[rear] = data;
+printf("Data Entered : %d\n",data);
+}
+}
+void Dequeue(){
+if(rear == -1){
+printf("Queue Underflow !\n");
+}
+else if(front == rear){
+printf("Data Dequeueped : %d\n",queue[front]);
+front = rear = -1;
+}
+else{
+printf("Data Dequeueped : %d\n",queue[front]);
+front++;
+}
+}
+int main(){
+int choice,data;
+while(1){
+printf("\nselect one option :\n");
+printf("1.Enqueue \n2.Dequeue\n3.Exit");
+printf("\nEnter a option : ");
+scanf("%d",&choice);
+switch (choice)
+{
+case 1:
+printf("Enter a Number to Enqueue : ");
+scanf("%d",&data);
+Enqueue(data);
+break;
+case 2:
+Dequeue();
+break;
+case 3:
+printf("Thank you !");
+return 0;
+default:
+printf("Opp's Wrong Input !");
+break;
+}
+}
+}
+

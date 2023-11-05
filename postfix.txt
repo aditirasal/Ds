@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<ctype.h>
+#define max 100
+int top = -1;
+float stack[max];
+void push(float stack[], float value){
+if (top == max-1){
+printf("Overflow !");
+}
+else{
+stack[++top] = value;
+}
+}
+float pop(){
+float value = -1;
+if (top == -1){
+}
+else{
+value = stack[top--];
+}
+return value;
+}
+float Evaluation(char exp[]){
+float A,B,value;
+int i = 0;
+while(exp[i] != '\0'){
+if (isdigit(exp[i])){
+push(stack,(float)exp[i]-'0');
+}
+else{
+A = pop();
+B = pop();
+switch (exp[i]){
+case '+':
+value = B + A;
+break;
+case '-':
+value = B - A;
+break;
+case '*':
+value = B * A;
+break;
+case '/':
+value = B / A;
+break;
+case '%':
+value = (int)B % (int)A;
+break;
+default:
+break;
+}
+push(stack,value);
+}
+i++;
+}
+return (pop());
+}
+int main(){
+float value;
+char exp[max];
+printf("Enter the Experssion : ");
+fgets(exp,max,stdin);
+value = Evaluation(exp);
+printf("Enter postfix evaluation is : %.3f",value);
+return 0;
+}
+
